@@ -4,12 +4,13 @@ function startgame()
 	localStorage.setItem("potions", 0);
 	localStorage.setItem("grenade", 0);
 	localStorage.setItem("lazer", 0);
-	localStorage.setItem("strength", 3);
-	localStorage.setItem("health", 32);
+	localStorage.setItem("strength", 5);
+	localStorage.setItem("health", 50);
 	localStorage.setItem("fight", 0);
 	localStorage.setItem("god", 0);
 	localStorage.setItem("status", 'alive');
 	localStorage.setItem("final", 'no');
+	
  
 }
 
@@ -54,9 +55,7 @@ function floorprogress()
 
 function encounter(route)
 {
-	document.getElementById("music").play();
-	document.getElementById("music").loop = true;
-	document.getElementById("music").volume = 0.4; 
+	
 	
 	chance = Math.floor(Math.random() * 10) + 1;
 	
@@ -117,7 +116,7 @@ function encounter(route)
 	else if (chance == 6){
 		document.getElementById("important").innerHTML = "big mob";
 		localStorage.setItem("mob", 30);
-		smallmob("Mech", 30,5)
+		smallmob("Mech", 30,3)
 		
 		if (route == 'Stairs'){
 			document.getElementById("important").innerHTML = 'You climb the stairs and find a some kind of machine sitting in the corner. As you get closer it suddenly comes to life in a flash. Prepare to fight.';
@@ -163,14 +162,14 @@ function floor15()
 {
 		document.getElementById("important").innerHTML = "You climb the stiars only to find some kind of kickboxing robot straight out of a bad action movie. Prepare to fight";
 		localStorage.setItem("mob", 60);
-		smallmob('Kickboxer', 60, 5)
+		smallmob('Kickboxer', 60, 4)
 }
 function floor20()
 {
 		document.getElementById("important").innerHTML = "The reason why you're here. The kingpin sits right in front of you behind double doors made from solid gold. As you open the door you mentally prepare for your final fight.";
 		localStorage.setItem("mob", 75);
 		localStorage.setItem("final", 'yes');	
-		smallmob('Kingpin', 75, 6)
+		smallmob('Kingpin', 75, 4)
 }
 
 function potions()
@@ -249,8 +248,8 @@ function battle(item)
 	}
 	else if (item =="potion"){
 	health = parseInt(health, 10) + 10;
-	if (health > 32){
-		health = 32;
+	if (health > 50){
+		health = 50;
 	}}
 	else if (item =="lazer"){
 		enemyhealth = enemyhealth - 10;
@@ -267,7 +266,7 @@ function battle(item)
 	localStorage.setItem("health", health);	
 	
 	
-	document.getElementById("health").innerHTML = "Health " + health + "/32";
+	document.getElementById("health").innerHTML = "Health " + health + "/50";
 	
 	if (item != 'trap'){
 	document.getElementById("enemyhealth").innerHTML = "Health " + enemyhealth + '/' + localStorage.getItem("mob");
@@ -280,6 +279,7 @@ function battle(item)
 		document.getElementById("enemyname").innerHTML = "";
 		document.getElementById("enemyhealth").innerHTML = "";
 		document.getElementById("enemystrength").innerHTML = "";
+		
 	}
 	
 	if (health <= 0){
@@ -289,9 +289,23 @@ function battle(item)
 		localStorage.setItem("status", 'dead');
 	}
 	
-	if (localStorage.getItem("Final") == 'get'){
+	if (localStorage.getItem("final") == 'yes' && enemyhealth <= 0){
 		document.getElementById("important").innerHTML = "You have defeated the kingpin and saved the city. You have won the game.";
 		document.getElementById("search").disabled = true; 
 		document.getElementById("progress").disabled = true;
 }
+}
 
+function music()
+{
+	if (document.getElementById("music").paused == true){
+		document.getElementById("music").play();
+		document.getElementById("music").loop = true;
+		document.getElementById("music").volume = 0.4;
+		localStorage.setItem("pause", false);
+	}
+	else{
+		document.getElementById("music").pause();
+		localStorage.setItem("pause", true);
+	}
+}

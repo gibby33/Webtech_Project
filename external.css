@@ -2,12 +2,13 @@
   display: grid;
   grid-template-columns: 25% 50% 25%;
   grid-template-rows: 50% 25%;
+  	height: 500px;
 }
 
 .leftcolumn{
 	grid-column-start: 1;
 	font-family: 'Permanent Marker', cursive;
-	height: 50px;
+
 }
 
 .middlecolumn{
