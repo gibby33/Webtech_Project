@@ -83,7 +83,7 @@ function encounter(route)
 			document.getElementById("important").innerHTML = 'As you enter the stairwell case you notice that the stairs leading up are partially blocked by debris. you lift it out of the way making yourself stronger in the process.';
 		}
 		else{
-			document.getElementById("important").innerHTML = 'As you search the floor you find a few barbells. You decid to give youself a quick workout before pressing on. You feel stronger now as a result.';
+			document.getElementById("important").innerHTML = 'As you search the floor you find a few barbells. You decide to give youself a quick workout before pressing on. You feel stronger now as a result.';
 	}
 	}
 	else if (chance == 4){
